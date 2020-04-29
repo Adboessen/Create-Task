@@ -1,11 +1,13 @@
 import tkinter as tk
 import requests
 from Logic import GameLogic
+import Logic as L
 from PIL import ImageTk, Image
-import Objects
-import Player
+import Objects as O
+from Player import PlayerData
 
 Logic = GameLogic()
+P = PlayerData()
 
 HEIGHT = 500
 WIDTH = 1000
@@ -50,9 +52,9 @@ class chooseClass(tk.Frame):
         
         self.class_title = tk.Label(self, text='Choose Class', font=('System',30), anchor='center').place(relx=.37, rely=.1)
         
-        self.Hbutton = tk.Button(self, text='Hunter', font=('System', 20), command=lambda: [Logic.start('1'), master.switch_frame(shopFront)]).place(relx=.15, rely=.72)
-        self.Wbutton = tk.Button(self, text='Warlock', font=('System', 20), command=lambda: [Logic.start('2'), master.switch_frame(shopFront)]).place(relx=.45, rely=.72)
-        self.Tbutton = tk.Button(self, text='Titan', font=('System', 20), command=lambda: [Logic.start('3'), master.switch_frame(shopFront)]).place(relx=.77, rely=.72)
+        self.Hbutton = tk.Button(self, text='Hunter', font=('System', 20), command=lambda: [Logic.start(1), master.switch_frame(shopFront)]).place(relx=.15, rely=.72)
+        self.Wbutton = tk.Button(self, text='Warlock', font=('System', 20), command=lambda: [Logic.start(2), master.switch_frame(shopFront)]).place(relx=.45, rely=.72)
+        self.Tbutton = tk.Button(self, text='Titan', font=('System', 20), command=lambda: [Logic.start(3), master.switch_frame(shopFront)]).place(relx=.77, rely=.72)
         
         self.hunter_image = ImageTk.PhotoImage(Image.open('resources/hunter.jpg'))
         self.hunter_label = tk.Label(self, image=self.hunter_image).place(relx=.11, rely=.3)
@@ -74,9 +76,9 @@ class shopFront(tk.Frame):
         
         self.shop_title = tk.Label(self, text='Shop', font=('System', 30), anchor='center').place(relx=.45, rely=.1)
         
-        self.Weaponbutton = tk.Button(self, text='Weapons', font=('System', 20), command=lambda: [Logic.start('1'), master.switch_frame(shopFront)]).place(relx=.15, rely=.72)
-        self.Armourbutton = tk.Button(self, text='Armour', font=('System', 20), command=lambda: [Logic.start('2'), master.switch_frame(shopFront)]).place(relx=.45, rely=.72)
-        self.Ammobutton = tk.Button(self, text='Ammo', font=('System', 20), command=lambda: [Logic.start('3'), master.switch_frame(shopFront)]).place(relx=.77, rely=.72)
+        self.Weaponbutton = tk.Button(self, text='Weapons', font=('System', 20), command=lambda: [master.switch_frame(shopWeapon)]).place(relx=.15, rely=.72)
+        self.Armourbutton = tk.Button(self, text='Armour', font=('System', 20), command=lambda: [master.switch_frame(shopArmour)]).place(relx=.45, rely=.72)
+        self.Ammobutton = tk.Button(self, text='Ammo', font=('System', 20), command=lambda: [master.switch_frame(shopAmmo)]).place(relx=.77, rely=.72)
         
         self.weapon_image = ImageTk.PhotoImage(Image.open('resources/weapon.png'))
         self.weapon_label = tk.Label(self, image=self.weapon_image).place(relx=.11, rely=.4)
@@ -91,22 +93,49 @@ class shopFront(tk.Frame):
 class shopWeapon(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        self.master = master
         
-class shopFArmour(tk.Frame):
+        self.w={}
+        self.wi={}
+        self.money = tk.Label(self,text='Money: $' + str(P.money), font=('System', 30)).grid(row=0, column=2, padx=10, pady=10)
+        self.exit_button = tk.Button(self, text="Exit", font=('System', 30), command = lambda: master.switch_frame(shopFront)).grid(row=0, column=3, padx=10, pady=10)
+        for i in range(len(O.weaponList)):
+            self.weaponPointer = O.weaponList[i]
+            self.w['name_label' + str(i)] = tk.Label(self, text=self.weaponPointer['name'], font=('System', 20)).grid(row=1, column=i, padx=10, pady=10)
+            self.wi['weapon_image' + str(i)] = ImageTk.PhotoImage(Image.open(self.weaponPointer['img']))
+            self.w['image_label' + str(i)] = tk.Label(self, image = self.wi['weapon_image' + str(i)]).grid(row=2,column=i)
+            self.w['damage_label' + str(i)] = tk.Label(self, text='Damage: ' + str(self.weaponPointer['damage']), font=('System', 20)).grid(row=3, column=i, padx=10, pady=10)
+            self.w['mag_label' + str(i)] = tk.Label(self, text='Mag Size: ' + str(self.weaponPointer['magSize']), font=('System', 20)).grid(row=4, column=i, padx=10, pady=10)
+            self.w['price_label' + str(i)] = tk.Label(self, text='Price: $' + str(self.weaponPointer['price']),font=('System', 20)).grid(row=5, column=i, padx=10, pady=10)
+            self.w['owned_label' + str(i)] = tk.Label(self, text='Owned: ' + str(self.weaponPointer['owned']), font=('System', 20)).grid(row=6, column=i, padx=10, pady=10)
+            if self.weaponPointer['owned'] == False:
+                self.w['buy_button' + str(i)] = tk.Button(self, text='Buy', font=('System', 20), command=lambda: Logic.shop(2,i)).grid(row=7, column=i)
+            
+class shopArmour(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        self.master = master
+        
+        self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
+        
+        self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
+        self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
+        
+        self.weaponFrame = tk.Frame(self, height=HEIGHT*.75, width=WIDTH*.75).place(anchor='c',relx=0.5,rely=0.5)
+
         
 class shopAmmo(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        self.master = master
+        
+        self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
+        
+        self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
+        self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
+
 
 class fight(tk.Frame):
-    def __init__(self):
+    def __init__(self, master):
         tk.Frame.__init__(self, master)
-        self.master = master
+
 
 if __name__ == "__main__":
     app = Game()

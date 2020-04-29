@@ -1,48 +1,53 @@
 import Objects as O
 
-type = ''
-weapons = []
-super = []
-armour = []
-maxHp = 0
-hp = 0
-exp = 0
-money = 0
-critChance = 0
-superCharge = 0
+class PlayerData(object):
+    def __init__(self):
+        PlayerData.type = ''
+        PlayerData.weapons = []
+        PlayerData.super = []
+        PlayerData.armour = []
+        PlayerData.maxHp = 0
+        PlayerData.hp = 0
+        PlayerData.exp = 0
+        PlayerData.money = 0
+        PlayerData.critChance = 0
+        PlayerData.superCharge = 0
+        
+    def Hunter(self):
+        PlayerData.type = 'Hunter'
+        PlayerData.weapons = [O.AceofSpades]
+        O.AceofSpades['owned'] = True
+        PlayerData.super = [O.goldenGun]
+        PlayerData.armour = []
+        PlayerData.maxHp = 100
+        PlayerData.hp = 100
+        PlayerData.exp = 0
+        PlayerData.money = 0
+        PlayerData.critChance = 45
+        PlayerData.superCharge = 0
+ 
+    def Warlock(self):
+        PlayerData.type = 'Warlock'
+        PlayerData.weapons = [O.HardLight]
+        O.HardLight['owned'] = True
+        PlayerData.super = [O.novaBomb]
+        PlayerData.armour = []
+        PlayerData.maxHp = 130
+        PlayerData.hp = 130
+        PlayerData.exp = 0
+        PlayerData.money = 0
+        PlayerData.critChance = 20
+        PlayerData.superCharge = 0
 
-def Hunter(self):
-    type = 'Hunter'
-    weapons = [O.AceofSpades]
-    super = [O.goldenGun]
-    armour = []
-    maxHp = 100
-    hp = 100
-    exp = 0
-    money = 0
-    critChance = 45
-    superCharge = 0
-    
-def Warlock(self):
-    type = 'Warlock'
-    weapons = [O.HardLight]
-    super = [O.novaBomb]
-    armour = []
-    maxHp = 130
-    hp = 130
-    exp = 0
-    money = 0
-    critChance = 20
-    superCharge = 0
-    
-def Titan(self):
-    type = 'Titan'
-    weapons=[O.Recluse]
-    super=[O.hammerofSol]
-    armour = []
-    maxHp = 200
-    hp = 200
-    exp = 0
-    money = 0
-    critChance = 10
-    superCharge = 0 
+    def Titan(self):
+        PlayerData.type = 'Titan'
+        PlayerData.weapons=[O.Recluse]
+        O.Recluse['owned'] = True
+        PlayerData.super=[O.hammerofSol]
+        PlayerData.armour = []
+        PlayerData.maxHp = 200
+        PlayerData.hp = 200
+        PlayerData.exp = 0
+        PlayerData.money = 0
+        PlayerData.critChance = 10
+        PlayerData.superCharge = 0 

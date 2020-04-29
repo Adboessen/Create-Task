@@ -1,6 +1,10 @@
 import Objects as O
-import Player as P
+from Player import PlayerData
 import random
+
+P = PlayerData()
+
+
 class GameLogic(object):
     # def __init__(self):
     #     self.run()
@@ -56,17 +60,19 @@ class GameLogic(object):
             #     print("Input is out of range. Enter new choice")
             #     armourChoice = int(input("Enter Number: "))
             #gets selected armour info and uses it to do stuff
-            armourPointer = O.armourList[(shopChoice2 - 1)]   
-            if O.money >= armourPointer['price'] and armourPointer['owned'] == False:
-                O.armour.append(armourPointer)
+            self.purchase = False
+            armourPointer = O.armourList[(shopChoice2)]   
+            if P.money >= armourPointer['price'] and armourPointer['owned'] == False:
+                P.armour.append(armourPointer)
                 armourPointer['owned'] = True
-                O.hp += armourPointer['hpAdded']
-                O.money -= armourPointer['price']
-                #print("You purchased " + armourPointer['name'])
-                return 'Purchase Successful'
-            else:
-                #print("Not enough money or already owned")
-                return 'Not enough money or already owned'
+                P.hp += armourPointer['hpAdded']
+                P.money -= armourPointer['price']
+                self.purchase = True
+            #     #print("You purchased " + armourPointer['name'])
+            #     return purchase
+            # else:
+            #     #print("Not enough money or already owned")
+            #     return purchase
                         
         elif shopChoice1 == 2:
             # print(f'''
@@ -81,16 +87,18 @@ class GameLogic(object):
             #     print("Input is out of range. Enter new choice")
             #     weaponChoice = int(input("Enter Number: ")) 
             #gets chosen weapon info and does more stuff
-            weaponPointer = O.weaponList[(shopChoice2 - 1)]
-            if O.money >= weaponPointer['price'] and weaponPointer['owned'] == False:
-                O.weapons.append(weaponPointer)
+            self.purchase = False
+            weaponPointer = O.weaponList[(shopChoice2)]
+            if P.money >= weaponPointer['price'] and weaponPointer['owned'] == False:
+                P.weapons.append(weaponPointer)
                 weaponPointer['owned'] = True
-                O.money -= weaponPointer['price']
-                #print("You purchased " + armourPointer['name'])
-                return 'Purchase Successful'
-            else:
-                #print("Not enough money or already owned")
-                return 'Not enough money or already owned'
+                P.money -= weaponPointer['price']
+                self.purchase = True
+            #     #print("You purchased " + armourPointer['name'])
+            #     return purchase
+            # else:
+            #     #print("Not enough money or already owned")
+            #     return purchase
             
         elif shopChoice1 == 3:
             # print("Choose Weapon")

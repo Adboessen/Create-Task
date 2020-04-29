@@ -1,9 +1,9 @@
-AceofSpades = {'name' : 'Ace of Spades', 'damage' : 1500, 'ammo' : 5, 'price' :900, 'ammoPrice' : 10, 'magSize' : 5, 'owned' : False, 'img' : 'Ace.jpg'}
-BadJuju = {'name' : 'Bad Juju','damage' : 8, 'ammo' : 21, 'price' :700, 'ammoPrice' : 6, 'magSize' : 21, 'owned' : False, 'img' : 'Juju.jpg'}
-HardLight = {'name' : 'Hard Light','damage' : 5, 'ammo' : 30, 'price' :650, 'ammoPrice' : 5, 'magSize' : 30, 'owned' : False, 'img' : 'Light.jpg'}
-Revoker = {'name' : 'Revoker','damage' : 45, 'ammo' : 2, 'price' : 1500, 'ammoPrice' : 200, 'magSize' : 2, 'owned' : False, 'img' : 'Revoker.jpg'}
-LordofWolves = {'name' : 'Lord of Wolves','damage' : 19, 'ammo' : 4, 'price' :500, 'ammoPrice' : 50, 'magSize' : 4, 'owned' : False, 'img' : 'Wolves.jpg'}
-Recluse = {'name' : 'Recluse','damage' : 7, 'ammo' : 35, 'price' :800, 'ammoPrice' : 3, 'magSize' : 35, 'owned' : False, 'img' : 'Recluse.jpg'}
+AceofSpades = {'name' : 'Ace of Spades', 'damage' : 15, 'ammo' : 5, 'price' :900, 'ammoPrice' : 10, 'magSize' : 5, 'owned' : False, 'img' : 'resources/Ace.jpg'}
+BadJuju = {'name' : 'Bad Juju','damage' : 8, 'ammo' : 21, 'price' :700, 'ammoPrice' : 6, 'magSize' : 21, 'owned' : False, 'img' : 'resources/Juju.jpg'}
+HardLight = {'name' : 'Hard Light','damage' : 5, 'ammo' : 30, 'price' :650, 'ammoPrice' : 5, 'magSize' : 30, 'owned' : False, 'img' : 'resources/Light.jpg'}
+Revoker = {'name' : 'Revoker','damage' : 45, 'ammo' : 2, 'price' : 1500, 'ammoPrice' : 200, 'magSize' : 2, 'owned' : False, 'img' : 'resources/Revoker.jpg'}
+LordofWolves = {'name' : 'Lord of Wolves','damage' : 19, 'ammo' : 4, 'price' :500, 'ammoPrice' : 50, 'magSize' : 4, 'owned' : False, 'img' : 'resources/Wolves.jpg'}
+Recluse = {'name' : 'Recluse','damage' : 7, 'ammo' : 35, 'price' :800, 'ammoPrice' : 3, 'magSize' : 35, 'owned' : False, 'img' : 'resources/Recluse.jpg'}
 weaponList = [AceofSpades, BadJuju, HardLight, Revoker, LordofWolves, Recluse]
     
 
