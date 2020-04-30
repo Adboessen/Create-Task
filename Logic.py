@@ -1,13 +1,13 @@
 import Objects as O
-from Player import PlayerData
+import Player as P
 import random
 
-P = PlayerData()
+
 
 
 class GameLogic(object):
-    # def __init__(self):
-    #     self.run()
+    def __init__(self):
+        GameLogic.purchase = False
     def start(self, classChoice):
         # print(f'''
         #       Welcome Gaurdian. Climb your way to the top. Good Luck
@@ -32,11 +32,41 @@ class GameLogic(object):
         #sets starting values
         # for player data based on class
         if classChoice == 1:
-            P.Hunter()
+            P.type = 'Hunter'
+            P.weapons = [O.AceofSpades]
+            O.AceofSpades['owned'] = True
+            P.super = [O.goldenGun]
+            P.armour = []
+            P.maxHp = 100
+            P.hp = 100
+            P.exp = 0
+            P.money = 1000
+            P.critChance = 45
+            P.superCharge = 0
         elif classChoice == 2:
-            P.Warlock()
+            P.type = 'Warlock'
+            P.weapons = [O.HardLight]
+            O.HardLight['owned'] = True
+            P.super = [O.novaBomb]
+            P.armour = []
+            P.maxHp = 130
+            P.hp = 130
+            P.exp = 0
+            P.money = 0
+            P.critChance = 20
+            P.superCharge = 0
         elif classChoice == 3:
-            P.Titan()
+            P.type = 'Titan'
+            P.weapons=[O.Recluse]
+            O.Recluse['owned'] = True
+            P.super=[O.hammerofSol]
+            P.armour = []
+            P.maxHp = 200
+            P.hp = 200
+            P.exp = 0
+            P.money = 0
+            P.critChance = 10
+            P.superCharge = 0        
     
     def shop(self, shopChoice1, shopChoice2):
         # shopChoice = int(input(f'''
@@ -60,14 +90,14 @@ class GameLogic(object):
             #     print("Input is out of range. Enter new choice")
             #     armourChoice = int(input("Enter Number: "))
             #gets selected armour info and uses it to do stuff
-            self.purchase = False
+            GameLogic.purchase = False
             armourPointer = O.armourList[(shopChoice2)]   
             if P.money >= armourPointer['price'] and armourPointer['owned'] == False:
                 P.armour.append(armourPointer)
                 armourPointer['owned'] = True
                 P.hp += armourPointer['hpAdded']
                 P.money -= armourPointer['price']
-                self.purchase = True
+                GameLogic.purchase = True
             #     #print("You purchased " + armourPointer['name'])
             #     return purchase
             # else:
@@ -87,13 +117,13 @@ class GameLogic(object):
             #     print("Input is out of range. Enter new choice")
             #     weaponChoice = int(input("Enter Number: ")) 
             #gets chosen weapon info and does more stuff
-            self.purchase = False
+            #GameLogic.purchase = False
             weaponPointer = O.weaponList[(shopChoice2)]
             if P.money >= weaponPointer['price'] and weaponPointer['owned'] == False:
                 P.weapons.append(weaponPointer)
                 weaponPointer['owned'] = True
                 P.money -= weaponPointer['price']
-                self.purchase = True
+                #GameLogic.purchase = True
             #     #print("You purchased " + armourPointer['name'])
             #     return purchase
             # else:
