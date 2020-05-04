@@ -20,7 +20,7 @@ hammerofSol = {'name' : 'Hammer of Sol', 'damage' : 15, 'strength' : 7, 'img' : 
 EmperorCalus = {'name' : 'Emperor Calus', 'damage' : 50, 'health' : 250}
 Shaxx = {'name' : 'Lord Shaxx', 'damage' : 10, 'health' : 75}
 Oryx = {'name' : 'Oryx', 'damage' : 15, 'health' : 30}
-DredgenYor = {'name' : 'Dredgen Yor', 'damage' : 5, 'health' : 20}
-enemiesList = [DredgenYor, Oryx, Shaxx, EmperorCalus]
+Gaul = {'name' : 'Gaul', 'damage' : 5, 'health' : 20}
+enemiesList = [Gaul, Oryx, Shaxx, EmperorCalus]
 
     

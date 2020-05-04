@@ -142,9 +142,9 @@ class GameLogic(object):
             #     print("Input is out of range. Enter new choice")
             #     ammoChoice = int(input("Enter Number: "))  
             #gets weapons chosen and refills the magazine
-            ammoPointer = O.weapons[(shopChoice2 - 1)]
-            if O.money > ((ammoPointer['magSize'] - ammoPointer['ammo']) * ammoPointer['ammoPrice']) and ammoPointer['ammo'] < ammoPointer['magSize']:
-                O.money -= ((ammoPointer['magSize'] - ammoPointer['ammo']) * ammoPointer['ammoPrice'])
+            ammoPointer = P.weapons[(shopChoice2)]
+            if P.money > ((ammoPointer['magSize'] - ammoPointer['ammo']) * ammoPointer['ammoPrice']) and ammoPointer['ammo'] < ammoPointer['magSize']:
+                P.money -= ((ammoPointer['magSize'] - ammoPointer['ammo']) * ammoPointer['ammoPrice'])
                 while ammoPointer['magSize'] > ammoPointer['ammo']:
                     ammoPointer['ammo'] += 1
                 #print("Magazine Filled")
