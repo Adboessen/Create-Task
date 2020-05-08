@@ -149,27 +149,32 @@ class shopAmmo(tk.Frame):
                 self.am['buy_button' + str(i)] = tk.Button(self, text='Reload', font=('System', 20), command= lambda i=i: [Logic.shop(3,i), master.switch_frame(shopFront)]).grid(row=6, column=i)
     
 class fight(tk.Frame):
+    def weaponPopup(self):
+        popup = tk.Tk()
+        f={}
+        fi={}
+        for i in range(len(P.weapons)):
+            weaponPointer = P.weapons[i]
+            f['name_label' + str(i)] = tk.Label(popup, text=weaponPointer['name'], font=('System', 20)).grid(row=1, column=i, padx=10, pady=10)
+            fi['weapon_image' + str(i)] = ImageTk.PhotoImage(Image.open(weaponPointer['img']))
+            f['image_label' + str(i)] = tk.Label(popup, image = fi['weapon_image' + str(i)]).grid(row=2,column=i)
+            f['ammo_label' + str(i)] = tk.Label(popup, text='Ammo Left: ' + str(weaponPointer['ammo']), font=('System', 20)).grid(row=3, column=i, padx=10, pady=10)          
+            f['select_button' + str(i)] = tk.Button(popup, text='Select', command=lambda i=i: Logic.fight(i, False)).grid(row=4, column=i, padx=10, pady=10)   
+        popup.mainloop() 
+           
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        self.f={}
-        self.fi={}
         self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
         
         self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
         self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
-        
-        self.weaponFrame = tk.Frame(self, height=HEIGHT/2, width=WIDTH/2).pack()
+
         for e in range(len(O.enemiesList)):
             enemy = O.enemiesList[e]
             P.hp = P.maxHp
             while P.hp > 0 and enemy['health'] > 0:
-                for i in range(len(P.weapons)):
-                    self.weaponPointer = P.weapons[i]
-                    self.f['name_label' + str(i)] = tk.Label(self.weaponFrame, text=self.weaponPointer['name'], font=('System', 20)).grid(row=1, column=i, padx=10, pady=10)
-                    self.fi['weapon_image' + str(i)] = ImageTk.PhotoImage(Image.open(self.weaponPointer['img']))
-                    self.f['image_label' + str(i)] = tk.Label(self.weaponFrame, image = self.ami['weapon_image' + str(i)]).grid(row=2,column=i)
-                    self.f['ammo_label' + str(i)] = tk.Label(self.weaponFrame, text='Ammo Left: ' + str(self.weaponPointer['ammo']), font=('System', 20)).grid(row=3, column=i, padx=10, pady=10)          
-                    self.f['select_button' + str(i)] = tk.Button(self.weaponFrame, text='Select', command=lambda i=i: Logic.fight(i, False)).grid(row=4, column=i, padx=10, pady=10)   
+                self.weaponPopup()    
+        
 
 if __name__ == "__main__":
     app = Game()
