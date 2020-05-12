@@ -1,6 +1,7 @@
 import Objects as O
 
 type = ''
+image = ''
 weapons = []
 super = []
 armour = []

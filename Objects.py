@@ -17,10 +17,10 @@ goldenGun = {'name' : 'Golden Gun', 'damage' : 20, 'strength' : 5, 'img' : 'Gold
 novaBomb = {'name' : 'Nova Bomb', 'damage' : 30, 'strength' : 3, 'img' : 'Nova.jpg'}
 hammerofSol = {'name' : 'Hammer of Sol', 'damage' : 15, 'strength' : 7, 'img' : 'Hammer.jpg'}
     
-EmperorCalus = {'name' : 'Emperor Calus', 'damage' : 50, 'health' : 250}
-Shaxx = {'name' : 'Lord Shaxx', 'damage' : 10, 'health' : 75}
-Oryx = {'name' : 'Oryx', 'damage' : 15, 'health' : 30}
-Gaul = {'name' : 'Gaul', 'damage' : 5, 'health' : 20}
+EmperorCalus = {'name' : 'Emperor Calus', 'damage' : 50, 'health' : 250, 'img' : 'calus.png'}
+Shaxx = {'name' : 'Lord Shaxx', 'damage' : 10, 'health' : 75, 'img' : 'shaxx.png'}
+Oryx = {'name' : 'Oryx', 'damage' : 15, 'health' : 30, 'img' : 'oryx.img'}
+Gaul = {'name' : 'Gaul', 'damage' : 5, 'health' : 20, 'img' : 'gaul.img'}
 enemiesList = [Gaul, Oryx, Shaxx, EmperorCalus]
 
     

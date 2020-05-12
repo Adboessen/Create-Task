@@ -33,6 +33,7 @@ class GameLogic(object):
         # for player data based on class
         if classChoice == 1:
             P.type = 'Hunter'
+            P.image = 'resources/Hunter'
             P.weapons = [O.AceofSpades]
             O.AceofSpades['owned'] = True
             P.super = [O.goldenGun]
@@ -45,6 +46,7 @@ class GameLogic(object):
             P.superCharge = 0
         elif classChoice == 2:
             P.type = 'Warlock'
+            P.image = 'resources/Warlock'
             P.weapons = [O.HardLight]
             O.HardLight['owned'] = True
             P.super = [O.novaBomb]
@@ -57,6 +59,7 @@ class GameLogic(object):
             P.superCharge = 0
         elif classChoice == 3:
             P.type = 'Titan'
+            P.image = 'resources/Titan'
             P.weapons=[O.Recluse]
             O.Recluse['owned'] = True
             P.super=[O.hammerofSol]

@@ -160,10 +160,21 @@ class fight(tk.Frame):
             f['image_label' + str(i)] = tk.Label(popup, image = fi['weapon_image' + str(i)]).grid(row=2,column=i)
             f['ammo_label' + str(i)] = tk.Label(popup, text='Ammo Left: ' + str(weaponPointer['ammo']), font=('System', 20)).grid(row=3, column=i, padx=10, pady=10)          
             f['select_button' + str(i)] = tk.Button(popup, text='Select', command=lambda i=i: Logic.fight(i, False)).grid(row=4, column=i, padx=10, pady=10)   
-        popup.mainloop() 
+        popup.mainloop()
+    
+    def superPopup(self):
+        popoup = tk.Tk()
+        playerSuper = P.super[0]
+        superName = tk.Label(popoup, text=playerSuper['name'], font=('system', 20)).grid(row=1, column=1)
+        superImage = ImageTk.PhotoImage(Image.open(playerSuper['img']))
+        ImageLabel = tk.Label(popoup, image= superImage).grid(row=2, column=1)
+        yesButton = tk.Button(popoup, text='Yes', font=('system', 20), command=Logic.fight(0,True)).grid(row=3, column=1)
+        noButton = tk.Button(popoup, text='No', font=('system', 20), command=Logic.fight(0,False)).grid(row=4, column=1)
+  
            
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+        
         self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
         
         self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
@@ -173,7 +184,18 @@ class fight(tk.Frame):
             enemy = O.enemiesList[e]
             P.hp = P.maxHp
             while P.hp > 0 and enemy['health'] > 0:
-                self.weaponPopup()    
+                self.weaponPopup()
+                if O.superCharge >= 100:
+                    self.superPopup()
+                eName = tk.Label(self, text=enemy['name'], font=('system', 20)).place()
+                pName = tk.Label(self, text=P.type, font=('system', 20)).place()
+                eImage = ImageTk.PhotoImage(Image.open(enemy['img']))
+                eImageLabel = tk.Label(self, image=eImage).place()
+                pImage = ImageTk.PhotoImage(Image.open(P.image))
+                pImageLabel =  tk.Label(self, image=pImage).place()
+                eHealthbar = tk.Progressbar(self, orient = 'HORIZONTAL', length = 100, mode = 'determinate').place()
+                pHealthbar = tk.Progressbar(self, orient = 'HORIZONTAL', length = 100, mode = 'determinate').place()
+                   
         
 
 if __name__ == "__main__":
