@@ -194,7 +194,11 @@ class fight(tk.Frame):
                 pImage = ImageTk.PhotoImage(Image.open(P.image))
                 pImageLabel =  tk.Label(self, image=pImage).place()
                 eHealthbar = tk.Progressbar(self, orient = 'HORIZONTAL', length = 100, mode = 'determinate').place()
-                pHealthbar = tk.Progressbar(self, orient = 'HORIZONTAL', length = 100, mode = 'determinate').place()
+                pHealthbar = tk.Progressbar(self, orient = 'HORIZONTAL', length = P.maxHp, mode = 'determinate').place()
+                eHealthbar['value'] = enemy['health']
+                pHealthbar['value'] = P.hp
+                master.switch_frame(shopFront)
+                
                    
         
 
