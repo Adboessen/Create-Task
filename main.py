@@ -197,8 +197,12 @@ class fight(tk.Frame):
                 pHealthbar = tk.Progressbar(self, orient = 'HORIZONTAL', length = P.maxHp, mode = 'determinate').place()
                 eHealthbar['value'] = enemy['health']
                 pHealthbar['value'] = P.hp
+                e.Damage = tk.Label(self, text='Damage: ' + enemy['damage'], font=('system', 20)).place()
                 master.switch_frame(shopFront)
-                
+            if P.hp <= 0:
+                Logic.endingLost()
+            Logic.endingWin()
+
                    
         
 
