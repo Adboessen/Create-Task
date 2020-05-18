@@ -149,13 +149,13 @@ class shopAmmo(tk.Frame):
                 self.am['buy_button' + str(i)] = tk.Button(self, text='Reload', font=('System', 20), command= lambda i=i: [Logic.shop(3,i), master.switch_frame(shopFront)]).grid(row=6, column=i)
     
 class fight(tk.Frame):
-    selectedWeapon = -1
-    superChoice = False
+    self.selectedWeapon = -1
+    self.superSelect = False
 
     def weaponSelect(self, weapon):
         selectedWeaopn = weapon
     def Super(self, Schoice):
-        superChoice = Schoice
+        superSelect = Schoice
     def weaponPopup(self):
         popup = tk.Tk()
         f={}
@@ -177,6 +177,7 @@ class fight(tk.Frame):
         ImageLabel = tk.Label(popoup, image= superImage).grid(row=2, column=1)
         yesButton = tk.Button(popoup, text='Yes', font=('system', 20), command= self.Super(True)).grid(row=3, column=1)
         noButton = tk.Button(popoup, text='No', font=('system', 20), command= self.Super(False)).grid(row=4, column=1)
+        popup.mainloop()
   
            
     def __init__(self, master):
@@ -191,7 +192,6 @@ class fight(tk.Frame):
             enemy = O.enemiesList[e]
             P.hp = P.maxHp
             while P.hp > 0 and enemy['health'] > 0:
-                self.weaponPopup()
                 if O.superCharge >= 100:
                     self.superPopup()
                 eName = tk.Label(self, text=enemy['name'], font=('system', 20)).place()
@@ -205,6 +205,8 @@ class fight(tk.Frame):
                 eHealthbar['value'] = enemy['health']
                 pHealthbar['value'] = P.hp
                 eDamage = tk.Label(self, text='Damage: ' + enemy['damage'], font=('system', 20)).place()
+                self.weaponPopup()
+                Logic.battle(selectedWeapon, superSelect)
                 master.switch_frame(shopFront)
             if P.hp <= 0:
                 Logic.endingLost()
