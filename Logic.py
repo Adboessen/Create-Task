@@ -33,7 +33,7 @@ class GameLogic(object):
         # for player data based on class
         if classChoice == 1:
             P.type = 'Hunter'
-            P.image = 'resources/Hunter'
+            P.image = 'resources/Hunter.jpg'
             P.weapons = [O.AceofSpades]
             O.AceofSpades['owned'] = True
             P.super = [O.goldenGun]
@@ -46,7 +46,7 @@ class GameLogic(object):
             P.superCharge = 0
         elif classChoice == 2:
             P.type = 'Warlock'
-            P.image = 'resources/Warlock'
+            P.image = 'resources/Warlock.jpg'
             P.weapons = [O.HardLight]
             O.HardLight['owned'] = True
             P.super = [O.novaBomb]
@@ -59,7 +59,7 @@ class GameLogic(object):
             P.superCharge = 0
         elif classChoice == 3:
             P.type = 'Titan'
-            P.image = 'resources/Titan'
+            P.image = 'resources/Titan.jpg'
             P.weapons=[O.Recluse]
             O.Recluse['owned'] = True
             P.super=[O.hammerofSol]
@@ -136,12 +136,12 @@ class GameLogic(object):
         elif shopChoice1 == 3:
             # print("Choose Weapon")
             # #lists all owned weapons
-            # for i in range(len(O.weapons)):
-            #     ammoPointer = O.weapons[i]
+            # for i in range(len(P.weapons)):
+            #     ammoPointer = P.weapons[i]
             #     print(f'''({i + 1}) [{ammoPointer['name']}] Ammo left: {ammoPointer['ammo']}''')
             # ammoChoice = int(input("Enter Number: "))
             # #checks if input is valid
-            # while ammoChoice > len(O.weapons) or ammoChoice < 1:
+            # while ammoChoice > len(P.weapons) or ammoChoice < 1:
             #     print("Input is out of range. Enter new choice")
             #     ammoChoice = int(input("Enter Number: "))  
             #gets weapons chosen and refills the magazine
@@ -169,26 +169,26 @@ class GameLogic(object):
         # ''')
         for e in range(len(O.enemiesList)):
             enemy = O.enemiesList[e]
-            O.hp = O.maxHp
+            P.hp = P.maxHp
             print("NEW ENEMY: " + enemy['name'])
             #loops battle sequence until enemy or player dies
-            while O.hp > 0 and enemy['health'] > 0:
-                self.shop()
+            while P.hp > 0 and enemy['health'] > 0:
+                #self.shop()
                 #choose weapon to use
                 print(f'''
                       CHOOSE WEAPON FOR ATTACK''')
-                for i in range(len(O.weapons)):
-                    weaponPointer = O.weapons[i]
+                for i in range(len(P.weapons)):
+                    weaponPointer = P.weapons[i]
                     print(f'''
                       ({i + 1}) [{weaponPointer['name']}] Damage: {weaponPointer['damage']} Ammo: {weaponPointer['ammo']}''')
                 weaponChoice = int(input("Enter Number: "))
                 #checks if input is valid
-                while weaponChoice > len(O.weapons) or weaponChoice < 1:
+                while weaponChoice > len(P.weapons) or weaponChoice < 1:
                     print("Input is out of range. Enter new choice")
                     weaponChoice = int(input("Enter Number: "))
                     
                      
-                selectedWeapon = O.weapons[(weaponChoice - 1)]
+                selectedWeapon = P.weapons[(weaponChoice - 1)]
                 if selectedWeapon['ammo'] > 0:
                 #deals damage based on crit or not
                     critRandom = random.randint(1,100)
@@ -226,8 +226,8 @@ class GameLogic(object):
                             #print("Super dealt " + str(playerSuper['damage']))
                             enemy['health'] -= playerSuper['damage']
                         O.superCharge = 0
-                #damaged by enemy
-                O.hp -= enemy['damage']
+                #damaged by enem
+                P.hp -= enemy['damage']
                 #print("You took " + str(enemy['damage']) + " damage")
                 #print ui of player and enemy
                 # print(f'''
@@ -238,7 +238,7 @@ class GameLogic(object):
                 #       Money: ${O.money}
                 #       ''')
             #if player is dead go to losing
-            if O.hp <= 0:
+            if P.hp <= 0:
                 self.endingLost()
         #wins if all enemies have been defeated
         self.endingWin()
