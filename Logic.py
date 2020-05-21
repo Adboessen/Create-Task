@@ -167,79 +167,78 @@ class GameLogic(object):
         # After each turn you get access to the shop
         # Defeat all 4 enemies and win the game
         # ''')
-        for e in range(len(O.enemiesList)):
-            enemy = O.enemiesList[e]
-            P.hp = P.maxHp
-            print("NEW ENEMY: " + enemy['name'])
+        # for e in range(len(O.enemiesList)):
+        enemy = O.enemiesList[e]
+        P.hp = P.maxHp
+            # print("NEW ENEMY: " + enemy['name'])
             #loops battle sequence until enemy or player dies
-            while P.hp > 0 and enemy['health'] > 0:
+            # while P.hp > 0 and enemy['health'] > 0:
                 #self.shop()
                 #choose weapon to use
-                print(f'''
-                      CHOOSE WEAPON FOR ATTACK''')
-                for i in range(len(P.weapons)):
-                    weaponPointer = P.weapons[i]
-                    print(f'''
-                      ({i + 1}) [{weaponPointer['name']}] Damage: {weaponPointer['damage']} Ammo: {weaponPointer['ammo']}''')
-                weaponChoice = int(input("Enter Number: "))
+                # print(f'''
+                #       CHOOSE WEAPON FOR ATTACK''')
+                # for i in range(len(P.weapons)):
+                #     weaponPointer = P.weapons[i]
+                #     print(f'''
+                #       ({i + 1}) [{weaponPointer['name']}] Damage: {weaponPointer['damage']} Ammo: {weaponPointer['ammo']}''')
+                # weaponChoice = int(input("Enter Number: "))
                 #checks if input is valid
-                while weaponChoice > len(P.weapons) or weaponChoice < 1:
-                    print("Input is out of range. Enter new choice")
-                    weaponChoice = int(input("Enter Number: "))
+                # while weaponChoice > len(P.weapons) or weaponChoice < 1:
+                #     print("Input is out of range. Enter new choice")
+                #     weaponChoice = int(input("Enter Number: "))
                     
                      
-                selectedWeapon = P.weapons[(weaponChoice - 1)]
-                if selectedWeapon['ammo'] > 0:
+        selectedWeapon = P.weapons[(weaponChoice - 1)]
+        if selectedWeapon['ammo'] > 0:
                 #deals damage based on crit or not
-                    critRandom = random.randint(1,100)
-                    print("")
-                    if critRandom <= O.critChance:
-                        enemy['health'] -= (selectedWeapon['damage'] * 1.5)
+            critRandom = random.randint(1,100)
+            if critRandom <= O.critChance:
+                enemy['health'] -= (selectedWeapon['damage'] * 1.5)
                         # print("CRIT!!! You dealt " + str((selectedWeapon['damage'] * 1.5)) + " damage")
-                        selectedWeapon['ammo'] -= 1
+                selectedWeapon['ammo'] -= 1
                         #gain money for damage done
-                        O.money += (selectedWeapon['damage'] * 10)
+                O.money += (selectedWeapon['damage'] * 10)
                         #super charged by damage
-                        O.superCharge += (selectedWeapon['damage'] + .5)
-                    else:   
-                        enemy['health'] -= selectedWeapon['damage']
+                P.superCharge += (selectedWeapon['damage'] + .5)
+            else:   
+                enemy['health'] -= selectedWeapon['damage']
                         # print("You dealt " + str(selectedWeapon['damage']) + " damage")
-                        selectedWeapon['ammo'] -= 1
+                selectedWeapon['ammo'] -= 1
                         #gain money for damage done
-                        O.money += (selectedWeapon['damage'] * 10)
+                O.money += (selectedWeapon['damage'] * 10)
                         #super charged by damage
-                        O.superCharge += (selectedWeapon['damage'] + .5)
-                else:
+                P.superCharge += (selectedWeapon['damage'] + .5)
+        else:
                     # print("Out of ammo")
-                    return 'out of ammo'
+            return 'out of ammo'
                 
                 #uses super if charge is full
-                if O.superCharge >= 100:
-                    playerSuper = O.super[i]
+        if P.superCharge >= 100: 
+            playerSuper = O.super[i]
                     # superChoice = int(input(f'''
                     #         {playerSuper['name']} is charged
                     #         (1) Use Super 
                     #         (2) Keep Super
                     #         Enter Choice: '''))
-                    if superChoice == 1:
-                        for i in range(int(playerSuper['strength'])):
+            if superChoice == 1:
+                for i in range(int(playerSuper['strength'])):
                             #print("Super dealt " + str(playerSuper['damage']))
-                            enemy['health'] -= playerSuper['damage']
-                        O.superCharge = 0
+                    enemy['health'] -= playerSuper['damage']
+                P.superCharge = 0
                 #damaged by enem
-                P.hp -= enemy['damage']
+        P.hp -= enemy['damage']
                 #print("You took " + str(enemy['damage']) + " damage")
                 #print ui of player and enemy
                 # print(f'''
                 #       [{self.playerName}]            VS.          [{enemy['name']}]
                 #       Weapon: {selectedWeapon['name']}            Damage: {enemy['damage']}
                 #       HP: {O.hp}                            HP: {enemy['health']}
-                #       Super Charge: {O.superCharge}/100
+                #       Super Charge: {P.superCharge}/100
                 #       Money: ${O.money}
                 #       ''')
             #if player is dead go to losing
-            if P.hp <= 0:
-                self.endingLost()
+        if P.hp <= 0:
+            self.endingLost()
         #wins if all enemies have been defeated
         self.endingWin()
         

@@ -196,20 +196,20 @@ class fight(tk.Frame):
             enemy = O.enemiesList[e]
             P.hp = P.maxHp
             while P.hp > 0 and enemy['health'] > 0:
-                if P.superCharge >= 100:
-                    self.superPopup()
-                eName = tk.Label(self, text=enemy['name'], font=('system', 20)).place()
-                pName = tk.Label(self, text=P.type, font=('system', 20)).place()
+                # if P.superCharge >= 100:
+                #     self.superPopup()
+                eName = tk.Label(self, text=enemy['name'], font=('system', 20)).place(anchor='center', relx=.75, rely=.2)
+                pName = tk.Label(self, text=P.type, font=('system', 20)).place(anchor='center', relx=.25, rely=.2)
                 eImage = ImageTk.PhotoImage(Image.open(enemy['img']))
-                eImageLabel = tk.Label(self, image=eImage).place()
+                eImageLabel = tk.Label(self, image=eImage).place(anchor='center', relx=.75, rely=.4)
                 pImage = ImageTk.PhotoImage(Image.open(P.image))
-                pImageLabel =  tk.Label(self, image=pImage).place()
-                eHealthbar = Progressbar(self, orient = 'horizontal', length = enemy['maxhp'], maximum = enemy['maxhp'], mode = 'determinate', value = enemy['health']).place()
-                pHealthbar = Progressbar(self, orient = 'horizontal', length = P.maxHp, maximum = P.maxHp, mode = 'determinate', value = P.hp).place()
-                eDamage = tk.Label(self, text='Damage: ' + str(enemy['damage']), font=('system', 20)).place()
-                self.weaponPopup()
-                Logic.battle(self.selectedWeapon, self.superSelect)
-                master.switch_frame(shopFront)
+                pImageLabel =  tk.Label(self, image=pImage).place(anchor='center', relx=.25, rely=.4)
+                eHealthbar = Progressbar(self, orient = 'horizontal', length = enemy['maxhp'], maximum = enemy['maxhp'], mode = 'determinate', value = enemy['health']).place(anchor='center', relx=.75, rely=.6)
+                pHealthbar = Progressbar(self, orient = 'horizontal', length = P.maxHp, maximum = P.maxHp, mode = 'determinate', value = P.hp).place(anchor='center', relx=.25, rely=.6)
+                eDamage = tk.Label(self, text='Damage: ' + str(enemy['damage']), font=('system', 20)).place(anchor='center', relx=.75, rely=.8)
+                #self.weaponPopup()
+                #Logic.battle(self.selectedWeapon, self.superSelect)
+                #master.switch_frame(shopFront)
             if P.hp <= 0:
                 Logic.endingLost()
             Logic.endingWin()
