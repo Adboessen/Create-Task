@@ -1,12 +1,12 @@
 import tkinter as tk
 import requests
-from Logic import GameLogic
-import Logic as L
 from PIL import ImageTk, Image
 import Objects as O
 import Player as P
 from tkinter.ttk import Progressbar
 from tkinter import Button, Tk, HORIZONTAL
+from Logic import GameLogic
+import Logic as L
 
 Logic = GameLogic()
 
@@ -35,11 +35,11 @@ class startMenu(tk.Frame):
         self.menu_image = ImageTk.PhotoImage(Image.open('resources/menu.jpg'))
         self.menu_label = tk.Label(self, image=self.menu_image).place(relwidth=1, relheight=1)
 
-        self.desitny_label = tk.Label(self, text='DESTINY', font=('System', 40), anchor='n').place(relx=.38, rely=.05)
+        #self.desitny_label = tk.Label(self, text='DESTINY', font=('System', 40), anchor='n').place(anchor='center', relx=.5, rely=.1)
 
-        self.start_button = tk.Button(self, text='Start', font=('System', 30), command=lambda: master.switch_frame(chooseClass)).place(relx=.2, rely=.75)
+        self.start_button = tk.Button(self, text='Start', font=('System', 30), command=lambda: master.switch_frame(chooseClass)).place(anchor='center', relx=.25, rely=.75)
 
-        self.exit_button = tk.Button(self, text='Exit', font=('System', 30), command=lambda: master.destroy()).place(relx=.7, rely=.75)
+        self.exit_button = tk.Button(self, text='Exit', font=('System', 30), command=lambda: master.destroy()).place(anchor='center', relx=.75, rely=.75)
     
 
 class chooseClass(tk.Frame):
@@ -51,20 +51,20 @@ class chooseClass(tk.Frame):
         self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
         self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
         
-        self.class_title = tk.Label(self, text='Choose Class', font=('System',30), anchor='center').place(relx=.37, rely=.1)
+        self.class_title = tk.Label(self, text='Choose Class', font=('System',30), anchor='center').place(anchor='center', relx=.5, rely=.1)
         
-        self.Hbutton = tk.Button(self, text='Hunter', font=('System', 20), command=lambda: [Logic.start(1), master.switch_frame(shopFront)]).place(relx=.15, rely=.72)
-        self.Wbutton = tk.Button(self, text='Warlock', font=('System', 20), command=lambda: [Logic.start(2), master.switch_frame(shopFront)]).place(relx=.45, rely=.72)
-        self.Tbutton = tk.Button(self, text='Titan', font=('System', 20), command=lambda: [Logic.start(3), master.switch_frame(shopFront)]).place(relx=.77, rely=.72)
+        self.Hbutton = tk.Button(self, text='Hunter', font=('System', 20), command=lambda: [Logic.start(1), master.switch_frame(shopFront)]).place(anchor='center', relx=.2, rely=.85)
+        self.Wbutton = tk.Button(self, text='Warlock', font=('System', 20), command=lambda: [Logic.start(2), master.switch_frame(shopFront)]).place(anchor='center', relx=.5, rely=.85)
+        self.Tbutton = tk.Button(self, text='Titan', font=('System', 20), command=lambda: [Logic.start(3), master.switch_frame(shopFront)]).place(anchor='center', relx=.8, rely=.85)
         
         self.hunter_image = ImageTk.PhotoImage(Image.open('resources/hunter.jpg'))
-        self.hunter_label = tk.Label(self, image=self.hunter_image).place(relx=.11, rely=.3)
+        self.hunter_label = tk.Label(self, image=self.hunter_image).place(anchor='center',relx=.2, rely=.5)
         
         self.warlock_image = ImageTk.PhotoImage(Image.open('resources/warlock.jpg'))
-        self.warlock_label = tk.Label(self, image=self.warlock_image).place(relx=.41, rely=.3)
+        self.warlock_label = tk.Label(self, image=self.warlock_image).place(anchor='center',relx=.5, rely=.5)
         
         self.titan_image = ImageTk.PhotoImage(Image.open('resources/titan.jpg'))
-        self.titan_label = tk.Label(self, image=self.titan_image).place(relx=.71, rely=.3)
+        self.titan_label = tk.Label(self, image=self.titan_image).place(anchor='center',relx=.8, rely=.5)
 
 class shopFront(tk.Frame):
     def __init__(self, master):
@@ -75,22 +75,22 @@ class shopFront(tk.Frame):
         self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
         self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
         
-        self.shop_title = tk.Label(self, text='Shop', font=('System', 30), anchor='center').place(relx=.45, rely=.1)
+        self.shop_title = tk.Label(self, text='Shop', font=('System', 30), anchor='center').place(anchor='center', relx=.5, rely=.1)
         
-        self.exitButton = tk.Button(self, text='Exit', font=('System', 15), command= lambda: master.switch_frame(fight)).place(relx=.475, rely=.25)
+        self.exitButton = tk.Button(self, text='Exit', font=('System', 15), command= lambda: master.switch_frame(fight)).place(anchor='center', relx=.5, rely=.25)
         
-        self.Weaponbutton = tk.Button(self, text='Weapons', font=('System', 20), command=lambda: [master.switch_frame(shopWeapon)]).place(relx=.15, rely=.72)
-        self.Armourbutton = tk.Button(self, text='Armour', font=('System', 20), command=lambda: [master.switch_frame(shopArmour)]).place(relx=.45, rely=.72)
-        self.Ammobutton = tk.Button(self, text='Ammo', font=('System', 20), command=lambda: [master.switch_frame(shopAmmo)]).place(relx=.77, rely=.72)
+        self.Weaponbutton = tk.Button(self, text='Weapons', font=('System', 20), command=lambda: [master.switch_frame(shopWeapon)]).place(anchor='center',relx=.15, rely=.85)
+        self.Armourbutton = tk.Button(self, text='Armour', font=('System', 20), command=lambda: [master.switch_frame(shopArmour)]).place(anchor='center',relx=.5, rely=.85)
+        self.Ammobutton = tk.Button(self, text='Ammo', font=('System', 20), command=lambda: [master.switch_frame(shopAmmo)]).place(anchor='center',relx=.8, rely=.85)
         
         self.weapon_image = ImageTk.PhotoImage(Image.open('resources/weapon.png'))
-        self.weapon_label = tk.Label(self, image=self.weapon_image).place(relx=.11, rely=.4)
+        self.weapon_label = tk.Label(self, image=self.weapon_image).place(anchor='center',relx=.15, rely=.55, height=180, width=180)
         
         self.armour_image = ImageTk.PhotoImage(Image.open('resources/armour.png'))
-        self.armour_label = tk.Label(self, image=self.armour_image).place(relx=.41, rely=.35)
+        self.armour_label = tk.Label(self, image=self.armour_image).place(anchor='center',relx=.5, rely=.55, height=180, width=180)
         
         self.ammo_image = ImageTk.PhotoImage(Image.open('resources/ammo.png'))
-        self.ammo_label = tk.Label(self, image=self.ammo_image).place(relx=.71, rely=.3)
+        self.ammo_label = tk.Label(self, image=self.ammo_image).place(anchor='center',relx=.8, rely=.55, height=180, width=180)
         
 
 class shopWeapon(tk.Frame):
@@ -149,69 +149,67 @@ class shopAmmo(tk.Frame):
             self.am['price_label' + str(i)] = tk.Label(self, text='Price: $' + str((self.ammoPointer['magSize'] - self.ammoPointer['ammo']) * self.ammoPointer['ammoPrice']),font=('System', 20)).grid(row=5, column=i, padx=10, pady=10)
             if self.ammoPointer['ammo'] != self.ammoPointer['magSize']:
                 self.am['buy_button' + str(i)] = tk.Button(self, text='Reload', font=('System', 20), command= lambda i=i: [Logic.shop(3,i), master.switch_frame(shopFront)]).grid(row=6, column=i)
-    
-class fight(tk.Frame):
-    selectedWeapon = -1
-    superSelect = False
 
-    def weaponSelect(self, weapon):
-         self.selectedWeapon = weapon
-    def Super(self, Schoice):
-         self.superSelect = Schoice
-    def weaponPopup(self):
-         popup = tk.Tk()
-         wFrame = tk.Frame(popup, bg='blue', width=(len(P.weapons)*25), height=200)
-         f={}
-         fi={}
-         for i in range(len(P.weapons)):
-             weaponPointer = P.weapons[i]
-             f['name_label' + str(i)] = tk.Label(wFrame, text=weaponPointer['name'], font=('System', 20)).grid(row=1, column=i, padx=10, pady=10)
-             fi['weapon_image' + str(i)] = ImageTk.PhotoImage(Image.open(weaponPointer['img']))
-             f['image_label' + str(i)] = tk.Label(wFrame, image = fi['weapon_image' + str(i)]).grid(row=2,column=i)
-             f['ammo_label' + str(i)] = tk.Label(wFrame, text='Ammo Left: ' + str(weaponPointer['ammo']), font=('System', 20)).grid(row=3, column=i, padx=10, pady=10)          
-             f['select_button' + str(i)] = tk.Button(wFrame, text='Select', command=lambda i=i: self.weaponSelect(i)).grid(row=4, column=i, padx=10, pady=10)   
-         popup.mainloop()
-    
-    def superPopup(self):
-         popup = tk.Tk()
-         sFrame = tk.Frame(popup, bg='blue', width=50, hieght=200)
-         playerSuper = P.super[0]
-         superName = tk.Label(sFrame, text=playerSuper['name'], font=('system', 20)).grid(row=1, column=1)
-         superImage = ImageTk.PhotoImage(Image.open(playerSuper['img']))
-         ImageLabel = tk.Label(sFrame, image= superImage).grid(row=2, column=1)
-         yesButton = tk.Button(sFrame, text='Yes', font=('system', 20), command= self.Super(True)).grid(row=3, column=1)
-         noButton = tk.Button(sFrame, text='No', font=('system', 20), command= self.Super(False)).grid(row=4, column=1)
-         popup.mainloop()
-  
-           
+class weaponSwitch(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+        self.am={}
+        self.ami={}
+        self.exit_button = tk.Button(self, text="Exit", font=('System', 20), command = lambda: master.switch_frame(fight)).grid(row=0, column=(len(P.weapons)//2), padx=10, pady=10)
+        
+        for i in range(len(P.weapons)):
+            self.ammoPointer = P.weapons[i]
+            self.am['name_label' + str(i)] = tk.Label(self, text=self.ammoPointer['name'], font=('System', 20)).grid(row=1, column=i, padx=10, pady=10)
+            self.ami['weapon_image' + str(i)] = ImageTk.PhotoImage(Image.open(self.ammoPointer['img']))
+            self.am['image_label' + str(i)] = tk.Label(self, image = self.ami['weapon_image' + str(i)]).grid(row=2,column=i)
+            self.am['ammo_label' + str(i)] = tk.Label(self, text='Ammo Left: ' + str(self.ammoPointer['ammo']), font=('System', 20)).grid(row=3, column=i, padx=10, pady=10)
+            self.am['damage_label' + str(i)] = tk.Label(self, text='Damage: ' + str(self.ammoPointer['damage']), font=('System', 20)).grid(row=4, column=i, padx=10, pady=10)
+            self.am['chose_button' + str(i)] = tk.Button(self, text='Select', font=('System', 20), command= lambda i=i: [fight.selectWeapon(self, i), master.switch_frame(fight)]).grid(row=6, column=i)
+   
+class fight(tk.Frame):
+    
+    def selectWeapon(self, choice):
+        O.WeaponChoice = choice
+    def useSuper(self):
+        O.SuperChoice = True
+        Logic.battle(O.WeaponChoice, O.SuperChoice, O.e)
+        O.SuperChoice = False
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        enemy = O.enemiesList[O.e]
         
         self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
         
         self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
         self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
-
-        for e in range(len(O.enemiesList)):
-            enemy = O.enemiesList[e]
-            P.hp = P.maxHp
-            while P.hp > 0 and enemy['health'] > 0:
-                # if P.superCharge >= 100:
-                #     self.superPopup()
-                eName = tk.Label(self, text=enemy['name'], font=('system', 20)).place(anchor='center', relx=.75, rely=.2)
-                pName = tk.Label(self, text=P.type, font=('system', 20)).place(anchor='center', relx=.25, rely=.2)
-                eImage = ImageTk.PhotoImage(Image.open(enemy['img']))
-                eImageLabel = tk.Label(self, image=eImage).place(anchor='center', relx=.75, rely=.4)
-                pImage = ImageTk.PhotoImage(Image.open(P.image))
-                pImageLabel =  tk.Label(self, image=pImage).place(anchor='center', relx=.25, rely=.4)
-                eHealthbar = Progressbar(self, orient = 'horizontal', length = enemy['maxhp'], maximum = enemy['maxhp'], mode = 'determinate', value = enemy['health']).place(anchor='center', relx=.75, rely=.6)
-                pHealthbar = Progressbar(self, orient = 'horizontal', length = P.maxHp, maximum = P.maxHp, mode = 'determinate', value = P.hp).place(anchor='center', relx=.25, rely=.6)
-                eDamage = tk.Label(self, text='Damage: ' + str(enemy['damage']), font=('system', 20)).place(anchor='center', relx=.75, rely=.8)
-                #self.weaponPopup()
-                #Logic.battle(self.selectedWeapon, self.superSelect)
-                #master.switch_frame(shopFront)
-            if P.hp <= 0:
+        if P.hp <= 0:
                 Logic.endingLost()
+        elif enemy['health'] <= 0 and O.e != 4:
+            O.e += 1
+            P.hp = P.maxHp
+            master.switch_frame(fight)
+            
+        elif P.hp >= 0 and enemy['health'] >= 0:
+            self.currentWeapon = P.weapons[O.WeaponChoice]
+            eName = tk.Label(self, text=enemy['name'], font=('system', 20)).place(anchor='center', relx=.75, rely=.1)
+            pName = tk.Label(self, text=P.type, font=('system', 20)).place(anchor='center', relx=.25, rely=.1)
+            self.eImage = ImageTk.PhotoImage(Image.open(str(enemy['img'])))
+            eImageLabel = tk.Label(self, image=self.eImage).place(anchor='center', relx=.75, rely=.4, width=200, height=200)
+            self.pImage = ImageTk.PhotoImage(Image.open(str(P.image)))
+            pImageLabel =  tk.Label(self, image=self.pImage).place(anchor='center', relx=.25, rely=.4)
+            eHealthbar = Progressbar(self, orient = 'horizontal', length = enemy['maxhp'], maximum = enemy['maxhp'], mode = 'determinate', value = enemy['health']).place(anchor='center', relx=.75, rely=.7)
+            pHealthbar = Progressbar(self, orient = 'horizontal', length = P.maxHp, maximum = P.maxHp, mode = 'determinate', value = P.hp).place(anchor='center', relx=.25, rely=.7)
+            eDamage = tk.Label(self, text='Damage: ' + str(enemy['damage']), font=('system', 20)).place(anchor='center', relx=.75, rely=.8)
+            pWeapon = tk.Label(self, text='Weapon: ' + str(self.currentWeapon['name']), font=('system', 20)).place(anchor='center', relx=.25, rely=.8)
+            shopButton = tk.Button(self, text='Shop', font=('system', 20), command = lambda: master.switch_frame(shopFront)).place(anchor='center', relx=.5, rely=.7)
+            attackButton = tk.Button(self, text='Attack', font=('system', 20), command = lambda: [Logic.battle(O.WeaponChoice, O.SuperChoice, O.e), master.switch_frame(fight)]).place(anchor='center', relx=.5, rely=.2)
+            chargeLabel = tk.Label(self, text='Super Charge', font=('system', 10)).place(anchor='center', relx=.5, rely=.35)
+            chargeBar = Progressbar(self, orient = 'horizontal', length = 100, maximum = 100, mode = 'determinate', value = P.superCharge).place(anchor='center', relx=.5, rely=.4)
+            changeWeapon = tk.Button(self, text='Change Weapon', font=('system', 15), command=lambda: master.switch_frame(weaponSwitch)).place(anchor='center', relx=.25, rely=.9)
+            if P.superCharge >= 100:
+                useSuper = tk.Button(self, text='Use Super', font=('system', 20), command = lambda: [self.useSuper(), master.switch_frame(fight)]).place(anchor='center', relx=.5, rely=.5)
+        
+        else:
             Logic.endingWin()
 
                         

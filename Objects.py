@@ -23,4 +23,8 @@ Oryx = {'name' : 'Oryx', 'damage' : 15, 'health' : 30,  'maxhp' : 30, 'img' : 'r
 Gaul = {'name' : 'Gaul', 'damage' : 5, 'health' : 20,  'maxhp' : 20, 'img' : 'resources/gaul.png'}
 enemiesList = [Gaul, Oryx, Shaxx, EmperorCalus]
 
+e = 0
+WeaponChoice = 0
+SuperChoice = False
+
     
