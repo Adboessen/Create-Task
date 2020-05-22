@@ -35,8 +35,6 @@ class startMenu(tk.Frame):
         self.menu_image = ImageTk.PhotoImage(Image.open('resources/menu.jpg'))
         self.menu_label = tk.Label(self, image=self.menu_image).place(relwidth=1, relheight=1)
 
-        #self.desitny_label = tk.Label(self, text='DESTINY', font=('System', 40), anchor='n').place(anchor='center', relx=.5, rely=.1)
-
         self.start_button = tk.Button(self, text='Start', font=('System', 30), command=lambda: master.switch_frame(chooseClass)).place(anchor='center', relx=.25, rely=.75)
 
         self.exit_button = tk.Button(self, text='Exit', font=('System', 30), command=lambda: master.destroy()).place(anchor='center', relx=.75, rely=.75)
@@ -165,6 +163,28 @@ class weaponSwitch(tk.Frame):
             self.am['ammo_label' + str(i)] = tk.Label(self, text='Ammo Left: ' + str(self.ammoPointer['ammo']), font=('System', 20)).grid(row=3, column=i, padx=10, pady=10)
             self.am['damage_label' + str(i)] = tk.Label(self, text='Damage: ' + str(self.ammoPointer['damage']), font=('System', 20)).grid(row=4, column=i, padx=10, pady=10)
             self.am['chose_button' + str(i)] = tk.Button(self, text='Select', font=('System', 20), command= lambda i=i: [fight.selectWeapon(self, i), master.switch_frame(fight)]).grid(row=6, column=i)
+class Won(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
+        
+        self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
+        self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
+        
+        winLabel = tk.Label(self, text='You Have Beat the Game!!', font=('system', 40)).place(anchor='center', relx=.5, rely=.3)
+        Restart = tk.Button(self, text='Restart', font=('system', 20), command=lambda: master.switch_frame(startMenu)).place(anchor='center', relx=.25, rely=.6)
+        Exit = tk.Button(self, text='Exit', font=('system', 20), command = lambda: master.destroy()).place(anchor='center', relx=.75, rely=.6)
+class Lost(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
+        
+        self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
+        self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
+        
+        loseLabel = tk.Label(self, text='You Have Been Defeated :(', font=('system', 40)).place(anchor='center', relx=.5, rely=.3)
+        Restart = tk.Button(self, text='Try Again', font=('system', 20), command=lambda: master.switch_frame(startMenu)).place(anchor='center', relx=.25, rely=.6)
+        Exit = tk.Button(self, text='Exit', font=('system', 20), command = lambda: master.destroy()).place(anchor='center', relx=.75, rely=.6)
    
 class fight(tk.Frame):
     
@@ -176,21 +196,26 @@ class fight(tk.Frame):
         O.SuperChoice = False
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        enemy = O.enemiesList[O.e]
-        
         self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
         
         self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
         self.background_label = tk.Label(self, image=self.background_image).place(relwidth=1, relheight=1)
-        if P.hp <= 0:
-                Logic.endingLost()
-        elif enemy['health'] <= 0 and O.e != 4:
-            O.e += 1
-            P.hp = P.maxHp
-            master.switch_frame(fight)
-            
-        elif P.hp >= 0 and enemy['health'] >= 0:
+        enemy = O.enemiesList[O.e]
+        Logic.checkHealth()
+        if O.Win == True:
+            winLabel = tk.Label(self, text='You Have Beat the Game!!', font=('system', 40)).place(anchor='center', relx=.5, rely=.3)
+            Exit = tk.Button(self, text='Exit', font=('system', 20), fg='red',command = lambda: master.destroy()).place(anchor='center', relx=.5, rely=.6)
+        elif O.Lose == True:
+            loseLabel = tk.Label(self, text='You Have Been Defeated :(', font=('system', 40)).place(anchor='center', relx=.5, rely=.3)
+            Exit = tk.Button(self, text='Exit', font=('system', 20), fg='red', command = lambda: master.destroy()).place(anchor='center', relx=.5, rely=.6)
+        else:
+         
             self.currentWeapon = P.weapons[O.WeaponChoice]
+            if enemy['health'] <= 0:
+                nextEnemy = tk.Label(self,text=enemy['name'] + ' Defeated!', font=('system', 15), fg='red').place(anchor='center', relx=.5, rely=.85)
+                continueButtin = tk.Button(self,text='Continue', font=('system',15), fg='red', command=lambda: master.switch_frame(fight)).place(anchor='center', relx=.5, rely=.95)
+            if self.currentWeapon['ammo'] <=0:
+                empty = tk.Label(self, text='Out of Ammo', font=('system', 15), fg='red').place(anchor='center', relx=.5, rely=.9)
             eName = tk.Label(self, text=enemy['name'], font=('system', 20)).place(anchor='center', relx=.75, rely=.1)
             pName = tk.Label(self, text=P.type, font=('system', 20)).place(anchor='center', relx=.25, rely=.1)
             self.eImage = ImageTk.PhotoImage(Image.open(str(enemy['img'])))
@@ -206,12 +231,13 @@ class fight(tk.Frame):
             chargeLabel = tk.Label(self, text='Super Charge', font=('system', 10)).place(anchor='center', relx=.5, rely=.35)
             chargeBar = Progressbar(self, orient = 'horizontal', length = 100, maximum = 100, mode = 'determinate', value = P.superCharge).place(anchor='center', relx=.5, rely=.4)
             changeWeapon = tk.Button(self, text='Change Weapon', font=('system', 15), command=lambda: master.switch_frame(weaponSwitch)).place(anchor='center', relx=.25, rely=.9)
+            if P.crit == True:
+                crit= tk.Label(self, text='CRIT!', font=('system', 20), fg='red').place(anchor='center', relx=.75, rely=.9)
+                P.crit = False
             if P.superCharge >= 100:
                 useSuper = tk.Button(self, text='Use Super', font=('system', 20), command = lambda: [self.useSuper(), master.switch_frame(fight)]).place(anchor='center', relx=.5, rely=.5)
-        
-        else:
-            Logic.endingWin()
-
+            Logic.checkHealth()
+     
                         
 
 if __name__ == "__main__":

@@ -2,14 +2,10 @@ import Objects as O
 import Player as P
 import random
 
-
-
-
 class GameLogic(object):
     def __init__(self):
         GameLogic.purchase = False
     def start(self, classChoice):
-
         #sets starting values
         # for player data based on class
         if classChoice == 1:
@@ -23,7 +19,7 @@ class GameLogic(object):
             P.hp = 100
             P.exp = 0
             P.money = 1000
-            P.critChance = 45
+            P.critChance = 30
             P.superCharge = 100
         elif classChoice == 2:
             P.type = 'Warlock'
@@ -98,8 +94,10 @@ class GameLogic(object):
             selectedWeapon = P.weapons[weaponChoice]
             if selectedWeapon['ammo'] > 0:
                 #deals damage based on crit or not
+                P.crit = False
                 critRandom = random.randint(1,100)
                 if critRandom <= P.critChance:
+                    P.crit = True
                     currentEnemy['health'] -= (selectedWeapon['damage'] * 1.5)
                         # print("CRIT!!! You dealt " + str((selectedWeapon['damage'] * 1.5)) + " damage")
                     selectedWeapon['ammo'] -= 1
@@ -117,15 +115,15 @@ class GameLogic(object):
                         #super charged by damage
                     P.superCharge += (selectedWeapon['damage'] + .5)
                     P.hp -= currentEnemy['damage']
-                         
-        
-    def endingWin(self):
-        print("You have beat the game")
     
-    def endingLost(self):
-        print("You have lost the game")
-        
-    def run(self):
-        self.start()
-        self.battle()
+    def checkHealth(self):
+        currentEnemy = O.enemiesList[O.e]
+        if currentEnemy['health'] <= 0:
+            O.e += 1
+            P.hp = P.maxHp
+        if P.hp <= 0:
+            O.Lose = True
+        if P.hp > 0 and O.e >= 4:
+            O.Win = True
+                         
  
