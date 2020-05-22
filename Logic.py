@@ -121,6 +121,10 @@ class GameLogic(object):
         if currentEnemy['health'] <= 0:
             O.e += 1
             P.hp = P.maxHp
+            for i in range(len(P.armour)):
+                armourPointer = P.armour[i]
+                armourPointer['owned'] = False
+            P.armour.clear()
         if P.hp <= 0:
             O.Lose = True
         if P.hp > 0 and O.e >= 4:

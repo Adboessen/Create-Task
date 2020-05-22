@@ -108,7 +108,7 @@ class shopWeapon(tk.Frame):
             self.w['price_label' + str(i)] = tk.Label(self, text='Price: $' + str(self.weaponPointer['price']),font=('System', 20)).grid(row=5, column=i, padx=10, pady=10)
             self.w['owned_label' + str(i)] = tk.Label(self, text='Owned: ' + str(self.weaponPointer['owned']), font=('System', 20)).grid(row=6, column=i, padx=10, pady=10)
             if self.weaponPointer['owned'] == False:
-                self.w['buy_button' + str(i)] = tk.Button(self, text='Buy', font=('System', 20), command= lambda i=i: [Logic.shop(2,i), master.switch_frame(shopFront)]).grid(row=7, column=i)
+                self.w['buy_button' + str(i)] = tk.Button(self, text='Buy', font=('System', 20), command= lambda i=i: [Logic.shop(2,i), master.switch_frame(shopWeapon)]).grid(row=7, column=i)
  
 class shopArmour(tk.Frame):
     def __init__(self, master):
@@ -126,7 +126,7 @@ class shopArmour(tk.Frame):
             self.a['price_label' + str(i)] = tk.Label(self, text='Price: $' + str(self.armourPointer['price']),font=('System', 20)).grid(row=5, column=i, padx=10, pady=10)
             self.a['owned_label' + str(i)] = tk.Label(self, text='Owned: ' + str(self.armourPointer['owned']), font=('System', 20)).grid(row=6, column=i, padx=10, pady=10)
             if self.armourPointer['owned'] == False:
-                self.a['buy_button' + str(i)] = tk.Button(self, text='Buy', font=('System', 20), command= lambda i=i: [Logic.shop(1,i), master.switch_frame(shopFront)]).grid(row=7, column=i)
+                self.a['buy_button' + str(i)] = tk.Button(self, text='Buy', font=('System', 20), command= lambda i=i: [Logic.shop(1,i), master.switch_frame(shopArmour)]).grid(row=7, column=i)
 
         
 class shopAmmo(tk.Frame):
@@ -134,7 +134,7 @@ class shopAmmo(tk.Frame):
         tk.Frame.__init__(self, master)
         self.am={}
         self.ami={}
-        self.money = tk.Label(self,text='Money: $' + str(P.money), font=('System', 20)).grid(row=0, column=len(P.weapons)//2, padx=10, pady=10)
+        self.money = tk.Label(self,text='Money: $' + str(P.money), font=('System', 20)).grid(row=0, column=(len(P.weapons)//2), padx=10, pady=10)
         self.exit_button = tk.Button(self, text="Exit", font=('System', 20), command = lambda: master.switch_frame(shopFront)).grid(row=0, column=(len(P.weapons)//2)+1, padx=10, pady=10)
         
         for i in range(len(P.weapons)):
@@ -146,7 +146,7 @@ class shopAmmo(tk.Frame):
             self.am['mag_label' + str(i)] = tk.Label(self, text='Mag Size: ' + str(self.ammoPointer['magSize']), font=('System', 20)).grid(row=4, column=i, padx=10, pady=10)
             self.am['price_label' + str(i)] = tk.Label(self, text='Price: $' + str((self.ammoPointer['magSize'] - self.ammoPointer['ammo']) * self.ammoPointer['ammoPrice']),font=('System', 20)).grid(row=5, column=i, padx=10, pady=10)
             if self.ammoPointer['ammo'] != self.ammoPointer['magSize']:
-                self.am['buy_button' + str(i)] = tk.Button(self, text='Reload', font=('System', 20), command= lambda i=i: [Logic.shop(3,i), master.switch_frame(shopFront)]).grid(row=6, column=i)
+                self.am['buy_button' + str(i)] = tk.Button(self, text='Reload', font=('System', 20), command= lambda i=i: [Logic.shop(3,i), master.switch_frame(shopAmmo)]).grid(row=6, column=i)
 
 class weaponSwitch(tk.Frame):
     def __init__(self, master):
