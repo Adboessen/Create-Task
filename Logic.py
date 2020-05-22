@@ -18,9 +18,9 @@ class GameLogic(object):
             P.maxHp = 100
             P.hp = 100
             P.exp = 0
-            P.money = 1000
+            P.money = 0
             P.critChance = 30
-            P.superCharge = 100
+            P.superCharge = 0
         elif classChoice == 2:
             P.type = 'Warlock'
             P.image = 'resources/Warlock.jpg'
