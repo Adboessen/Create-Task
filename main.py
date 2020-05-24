@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import *
 import requests
 from PIL import ImageTk, Image
 import Objects as O
@@ -196,6 +197,7 @@ class fight(tk.Frame):
         O.SuperChoice = False
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+        pSuper = P.super[0]
         self.frame = tk.Frame(self, height=HEIGHT, width=WIDTH).pack()
         
         self.background_image = ImageTk.PhotoImage(Image.open('resources/class.jpg'))
@@ -231,10 +233,13 @@ class fight(tk.Frame):
             chargeLabel = tk.Label(self, text='Super Charge', font=('system', 10)).place(anchor='center', relx=.5, rely=.35)
             chargeBar = Progressbar(self, orient = 'horizontal', length = 100, maximum = 100, mode = 'determinate', value = P.superCharge).place(anchor='center', relx=.5, rely=.4)
             changeWeapon = tk.Button(self, text='Change Weapon', font=('system', 15), command=lambda: master.switch_frame(weaponSwitch)).place(anchor='center', relx=.25, rely=.9)
+            self.sImage = ImageTk.PhotoImage(Image.open(str(pSuper['img'])))
+            sImageLabel = tk.Label(self, image=self.sImage).place(anchor='center', relx=.5, rely=.5, width=60, height=60)
             if P.crit == True:
                 crit= tk.Label(self, text='CRIT!', font=('system', 20), fg='red').place(anchor='center', relx=.75, rely=.9)
                 P.crit = False
             if P.superCharge >= 100:
+                #sImageLabel.destroy()
                 useSuper = tk.Button(self, text='Use Super', font=('system', 20), command = lambda: [self.useSuper(), master.switch_frame(fight)]).place(anchor='center', relx=.5, rely=.5)
             Logic.checkHealth()
      

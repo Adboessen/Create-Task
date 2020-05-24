@@ -13,9 +13,9 @@ gauntlets = {'name' : 'Gauntlets', 'hpAdded' : 10, 'price' :120, 'owned' : False
 boots = {'name' : 'Boots', 'hpAdded' : 5, 'price' :50, 'owned' : False, 'img' : 'resources/Boots.jpg'}
 armourList = [helmet, chestPlate, gauntlets, boots]
     
-goldenGun = {'name' : 'Golden Gun', 'damage' : 20, 'strength' : 5, 'img' : 'resources/Golden.jpg'}
-novaBomb = {'name' : 'Nova Bomb', 'damage' : 30, 'strength' : 3, 'img' : 'resources/Nova.jpg'}
-hammerofSol = {'name' : 'Hammer of Sol', 'damage' : 15, 'strength' : 7, 'img' : 'resources/Hammer.jpg'}
+goldenGun = {'name' : 'Golden Gun', 'damage' : 20, 'strength' : 5, 'img' : 'resources/Golden.png'}
+novaBomb = {'name' : 'Nova Bomb', 'damage' : 30, 'strength' : 3, 'img' : 'resources/Nova.png'}
+hammerofSol = {'name' : 'Hammer of Sol', 'damage' : 15, 'strength' : 7, 'img' : 'resources/Hammer.png'}
     
 EmperorCalus = {'name' : 'Emperor Calus', 'damage' : 50, 'health' : 250, 'maxhp' : 250, 'img' : 'resources/calus.jpg'}
 Shaxx = {'name' : 'Lord Shaxx', 'damage' : 10, 'health' : 90,  'maxhp' : 90, 'img' : 'resources/shaxx.jpg'}
@@ -23,7 +23,7 @@ Oryx = {'name' : 'Oryx', 'damage' : 15, 'health' : 70,  'maxhp' : 70, 'img' : 'r
 Gaul = {'name' : 'Gaul', 'damage' : 5, 'health' : 50,  'maxhp' : 50, 'img' : 'resources/gaul.png'}
 enemiesList = [Gaul, Oryx, Shaxx, EmperorCalus]
 
-e = 1
+e = 0
 WeaponChoice = 0
 SuperChoice = False
 
